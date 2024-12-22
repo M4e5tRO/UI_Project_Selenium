@@ -8,3 +8,4 @@ credentials.py
 .env
 allure-report/
 allure-results/
+screenshots
