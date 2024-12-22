@@ -1,3 +1,5 @@
+import allure
+
 from ..pages.base_page import BasePage
 from ..pages.locators import create_account_locators as loc
 
@@ -5,6 +7,7 @@ from ..pages.locators import create_account_locators as loc
 class CreateAccount(BasePage):
     PAGE_URL = '/customer/account/create/'
 
+    @allure.step('Fill in the form')
     def fill_in_form(self, first_name, last_name, email, password, conf_password):
 
         fist_name_field = self.find(loc.first_name_loc)
@@ -22,15 +25,18 @@ class CreateAccount(BasePage):
 
         create_btn.click()
 
+    @allure.step('Check redirection page URL')
     def check_redirection_page_url(self, account_url):
         url = self.driver.current_url
         assert account_url == url, f'Expected result: {account_url}, Actual result: {url}'
 
+    @allure.step('Check success message')
     def check_success_message(self, message):
         page_message = self.find(loc.success_message_loc)
         message_text = page_message.text
         assert message == message_text, f'Expected result: {message}, Actual result: {message_text}'
 
+    @allure.step('Check contact info')
     def check_contact_info(self, first_name, last_name, email):
         full_name = f'{first_name} {last_name}'
 
@@ -41,6 +47,7 @@ class CreateAccount(BasePage):
         assert full_name == full_name_text, f'Expected result: {full_name}, Actual result: {full_name_text}'
         assert email == email_text, f'Expected result: {email}, Actual result: {email_text}'
 
+    @allure.step('Check inline error for required fields')
     def check_inline_error_for_required_fields(self, inline_error):
         create_btn = self.find(loc.create_btn_loc)
         create_btn.click()
@@ -62,6 +69,7 @@ class CreateAccount(BasePage):
             f'Expected result: {inline_error}, Actual result: {conf_password_error_text}'
         )
 
+    @allure.step('Check password errors')
     def check_password_errors(self, invalid_pass_length, pass_error):
 
         password_field = self.find(loc.password_loc)
