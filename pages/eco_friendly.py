@@ -1,4 +1,5 @@
 import random
+import allure
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -28,6 +29,7 @@ def paging_names(func):
 class EcoFriendly(BasePage):
     PAGE_URL = '/collections/eco-friendly.html'
 
+    @allure.step('Check sorting by Product Name ASC')
     def check_sort_by_product_name_asc(self):
         items = self.find_all(loc.item_name_loc)
         items_names = list(map(lambda item: item.text, items))
@@ -36,6 +38,7 @@ class EcoFriendly(BasePage):
             f'Sorting "Product Name" is NOT ASC - Expected: {python_sort_asc}, Actual: {items_names}'
         )
 
+    @allure.step('Check sorting by Product Name DESC')
     def check_sort_by_product_name_desc(self):
         items = self.find_all(loc.item_name_loc)
         items_names = list(map(lambda item: item.text, items))
@@ -44,6 +47,7 @@ class EcoFriendly(BasePage):
             f'Sorting "Product Name" in NOT DESC - Expected: {python_sort_desc}, Actual: {items_names}'
         )
 
+    @allure.step('Check sorting by Price ASC')
     def check_sort_by_price_asc(self):
         prices = self.find_all(loc.item_price_loc)
         prices_text = list(map(lambda price: price.text, prices))
@@ -52,6 +56,7 @@ class EcoFriendly(BasePage):
             f'Sorting "Price" in NOT ASC - Expected: {prices_text}, Actual: {python_sort_asc}'
         )
 
+    @allure.step('Check sorting by Price DESC')
     def check_sort_by_price_desc(self):
         prices = self.find_all(loc.item_price_loc)
         prices_text = list(map(lambda price: price.text, prices))
@@ -60,22 +65,26 @@ class EcoFriendly(BasePage):
             f'Sorting "Price" in NOT DESC - Expected: {prices_text}, Actual: {python_sort_desc}'
         )
 
+    @allure.step('Check paging: Next')
     @paging_names
     def check_paging_next(self):
         paging_next = self.find(loc.paging_next_loc)
         paging_next.click()
 
+    @allure.step('Check paging: Previous')
     @paging_names
     def check_paging_prev(self):
         paging_prev = self.find(loc.paging_prev_loc)
         paging_prev.click()
 
+    @allure.step('Check paging: Random Item')
     @paging_names
     def check_paging_item(self):
         items = self.find_all(loc.paging_item_loc)
         item: WebElement = random.choice(items)
         item.click()
 
+    @allure.step('Check limiter')
     def check_limiter(self, limiter):
 
         current_url = self.driver.current_url

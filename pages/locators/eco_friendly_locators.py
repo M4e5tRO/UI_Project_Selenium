@@ -1,8 +1,8 @@
 from selenium.webdriver.common.by import By
 
 
-item_name_loc = (By.CLASS_NAME, 'product-item-link')
-item_price_loc = (By.CLASS_NAME, 'price-wrapper ')
+item_name_loc = (By.CSS_SELECTOR, '.product-image-photo')
+item_price_loc = (By.XPATH, '//*[@class="price-wrapper "]/child::*[@class="price"]')
 
 paging_next_loc = (By.XPATH, '(//a[contains(@class, "next")])[2]')
 paging_prev_loc = (By.XPATH, '(//a[contains(@class, "previous")])[2]')
