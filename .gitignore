@@ -1,0 +1,10 @@
+venv
+.idea
+__pycache__
+.DS_Store
+.pytest_cache
+.venv
+credentials.py
+.env
+allure-report/
+allure-results/
