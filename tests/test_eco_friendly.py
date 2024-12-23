@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from ..test_data import data_list as dl
 
@@ -6,6 +7,7 @@ from ..test_data import data_list as dl
 @allure.feature('Eco Friendly')
 class TestEcoFriendly:
 
+    @pytest.mark.smoke
     @allure.story('Test Sorting')
     def test_sort_by(self, eco_friendly):
         eco_friendly.open_page()
@@ -20,6 +22,7 @@ class TestEcoFriendly:
         eco_friendly.switch_asc()
         eco_friendly.check_sort_by_price_asc()
 
+    @pytest.mark.regression
     @allure.story('Test Paging')
     def test_paging(self, eco_friendly):
         eco_friendly.open_page()
@@ -27,6 +30,7 @@ class TestEcoFriendly:
         eco_friendly.check_paging_prev()
         eco_friendly.check_paging_item()
 
+    @pytest.mark.extended
     @allure.story('Test Limiter')
     def test_limiter(self, eco_friendly):
         eco_friendly.open_page()
