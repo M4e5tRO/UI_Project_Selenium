@@ -13,6 +13,11 @@ on:
           - regression
           - extended
           - all
+          
+permissions:
+  contents: read
+  pages: write
+  id-token: write
     
 jobs:
   run-tests:
@@ -55,8 +60,8 @@ jobs:
       - name: Save allure report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
+          name: _site
+          path: _site
           retention-days: 1
           
   publish-report:
