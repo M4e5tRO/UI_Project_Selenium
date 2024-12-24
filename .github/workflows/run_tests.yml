@@ -20,6 +20,10 @@ permissions:
   id-token: write
     
 jobs:
+  download-history:
+    runs-on: ubuntu-latest
+    name: Download history
+
   run-tests:
     runs-on: ubuntu-latest
     name: Run autotests
